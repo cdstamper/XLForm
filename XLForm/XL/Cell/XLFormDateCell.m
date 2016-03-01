@@ -107,6 +107,7 @@
         }
         return result;
     }
+    self.datePicker = nil;
     return [super resignFirstResponder];
 }
 
