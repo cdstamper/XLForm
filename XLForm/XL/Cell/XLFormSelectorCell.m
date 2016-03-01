@@ -121,7 +121,7 @@
 
 -(UIPickerView *)pickerView
 {
-    if (_pickerView) return _pickerView;
+    // if (_pickerView) return _pickerView;
     _pickerView = [[UIPickerView alloc] init];
     _pickerView.delegate = self;
     _pickerView.dataSource = self;
