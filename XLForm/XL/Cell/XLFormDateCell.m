@@ -83,7 +83,6 @@
             [_datePicker addTarget:self action:@selector(datePickerValueChanged:) forControlEvents:UIControlEventAllEvents];
             
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-                [_datePicker setDate:[NSDate dateWithTimeIntervalSinceNow:0] animated:true ];
                 [_datePicker setCountDownDuration:_datePicker.countDownDuration];
             });
             
@@ -227,9 +226,11 @@
     [self setModeToDatePicker:_datePicker];
     [_datePicker addTarget:self action:@selector(datePickerValueChanged:) forControlEvents:UIControlEventAllEvents];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        if (_datePicker.minuteInterval && _datePicker.datePickerMode==UIDatePickerModeCountDownTimer)[_datePicker setCountDownDuration:_datePicker.minuteInterval];
+        if (_datePicker.minuteInterval && _datePicker.datePickerMode==UIDatePickerModeCountDownTimer) {
+        [_datePicker setCountDownDuration:_datePicker.minuteInterval];
         [_datePicker setCountDownDuration:_datePicker.countDownDuration];
         [self datePickerValueChanged:_datePicker];
+        }
     });
     return _datePicker;
 }
