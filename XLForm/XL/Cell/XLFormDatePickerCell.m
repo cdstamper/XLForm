@@ -45,11 +45,7 @@
     _datePicker = [UIDatePicker autolayoutView];
     [_datePicker addTarget:self action:@selector(datePickerValueChanged:) forControlEvents:UIControlEventAllEvents];
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        [_datePicker setCountDownDuration:_datePicker.countDownDuration];
-        [self datePickerValueChanged:_datePicker];
-    });
-    
+        
     return _datePicker;
 }
 
