@@ -32,9 +32,17 @@ typedef NS_ENUM(NSUInteger, XLFormDateDatePickerMode) {
     XLFormDateDatePickerModeTime
 };
 
+typedef NS_ENUM(NSUInteger, XLFormDateDatePickerStyle) {
+    XLFormDateDatePickerAutomatictStyle,
+    XLFormDateDatePickerWheelsStyle,
+    XLFormDateDatePickerCompactSyle
+};
+
+
 @interface XLFormDateCell : XLFormBaseCell
 
 @property (nonatomic) XLFormDateDatePickerMode formDatePickerMode;
+@property (nonatomic) XLFormDateDatePickerStyle formDatePickerStyle;
 @property (nonatomic) NSDate *minimumDate;
 @property (nonatomic) NSDate *maximumDate;
 @property (nonatomic) NSInteger minuteInterval;
