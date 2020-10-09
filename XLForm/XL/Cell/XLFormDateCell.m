@@ -215,6 +215,12 @@
     
     if (self.maximumDate)
         datePicker.maximumDate = self.maximumDate;
+    
+    if (self.formDatePickerStyle) {
+       if (@available(iOS 14, *)) {
+           datePicker.preferredDatePickerStyle = self.formDatePickerStyle;
+       }
+   }
 }
 
 #pragma mark - Properties
@@ -247,6 +253,23 @@
 -(void)setFormDatePickerMode:(XLFormDateDatePickerMode)formDatePickerMode
 {
     _formDatePickerMode = formDatePickerMode;
+    if ([self isFirstResponder]){
+        if ([self.rowDescriptor.rowType isEqualToString:XLFormRowDescriptorTypeDateInline] || [self.rowDescriptor.rowType isEqualToString:XLFormRowDescriptorTypeTimeInline] || [self.rowDescriptor.rowType isEqualToString:XLFormRowDescriptorTypeDateTimeInline] || [self.rowDescriptor.rowType isEqualToString:XLFormRowDescriptorTypeCountDownTimerInline])
+        {
+            NSIndexPath * selectedRowPath = [self.formViewController.form indexPathOfFormRow:self.rowDescriptor];
+            NSIndexPath * nextRowPath = [NSIndexPath indexPathForRow:selectedRowPath.row + 1 inSection:selectedRowPath.section];
+            XLFormRowDescriptor * nextFormRow = [self.formViewController.form formRowAtIndex:nextRowPath];
+            if ([nextFormRow.rowType isEqualToString:XLFormRowDescriptorTypeDatePicker]){
+                XLFormDatePickerCell * datePickerCell = (XLFormDatePickerCell *)[nextFormRow cellForFormController:self.formViewController];
+                [self setModeToDatePicker:datePickerCell.datePicker];
+            }
+        }
+    }
+}
+
+-(void)setFormDatePickerStyle:(XLFormDateDatePickerStyle)formDatePickerStyle
+{
+    _formDatePickerStyle = formDatePickerStyle;
     if ([self isFirstResponder]){
         if ([self.rowDescriptor.rowType isEqualToString:XLFormRowDescriptorTypeDateInline] || [self.rowDescriptor.rowType isEqualToString:XLFormRowDescriptorTypeTimeInline] || [self.rowDescriptor.rowType isEqualToString:XLFormRowDescriptorTypeDateTimeInline] || [self.rowDescriptor.rowType isEqualToString:XLFormRowDescriptorTypeCountDownTimerInline])
         {
