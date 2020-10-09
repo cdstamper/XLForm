@@ -218,7 +218,7 @@
     
     if (self.formDatePickerStyle) {
        if (@available(iOS 14, *)) {
-           datePicker.preferredDatePickerStyle = self.formDatePickerStyle;
+           datePicker.preferredDatePickerStyle = UIDatePickerStyleWheels;
        }
    }
 }
